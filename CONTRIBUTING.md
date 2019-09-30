@@ -1,0 +1,1 @@
+To be replaced by the template contribution guide.
