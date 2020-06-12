@@ -16,3 +16,7 @@
 ## Contributing
 See [CONTRIBUTING](./CONTRIBUTING.md) for details.
 
+## Security
+See [SECURITY](./SECURITY.md) for details.
+
+
