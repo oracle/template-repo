@@ -6,7 +6,7 @@ Please do NOT raise a GitHub Issue to report a security vulnerability. If you be
 
 We ask that you do not use other channels or contact project contributors directly. 
 
-Non-vulnerability related security issues such as new great new ideas for security features are welcome on GitHub Issues. 
+Non-vulnerability related security issues such as great new ideas for security features are welcome on GitHub Issues. 
 
 ## Security Updates, Alerts and Bulletins
 
