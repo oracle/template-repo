@@ -1,20 +1,46 @@
-# About [PROJECT NAME]
-&lt;Describe your project and who it is for&gt;
+# About [project]
+
+> Describe your project's features, functionality and target audience
 
 ## Installation
-&lt;Installation instructions go here&gt;
+
+> Provide detailed step-by-step installation instructions
 
 ## Documentation
-&lt;Links to documentation go here&gt;
+
+> Developer-oriented documentation can be published on GitHub, but all product
+  documentation must be published on <https://docs.oracle.com>.
 
 ## Examples
-&lt;Describe where to find examples&gt;
+
+> Describe any included examples or provide a link to a demo/tutorial
 
 ## Help
-&lt;Instructions on where to get help go here&gt;
+
+> Inform users on where to get help or how to receive official support from Oracle
+  (if applicable).
 
 ## Contributing
-See [CONTRIBUTING](./CONTRIBUTING.md) for details.
+
+> If your project has specific contribution requirements, update the
+  `CONTRIBUTING.md` file to ensure those requirements are clearly explained.
+
+This project welcomes contributions from the community. Before submitting a pull
+request, please [review our contribution guide](./CONTRIBUTING.md).
 
 ## Security
-See [SECURITY](./SECURITY.md) for details.
+
+Please consult the [security guide](./SECURITY.md) for our responsible security
+vulnerability disclosure process.
+
+## License
+
+> The correct copyright notice format for both documentation and software
+  is `Copyright (c) [year,] year Oracle and/or its affiliates.`
+  You must include the year the content was first released (on any platform) and
+  the most recent year in which it was revised.
+
+Copyright (c) 2021 Oracle and/or its affiliates.
+
+Released under the Universal Permissive License v1.0 as shown at
+<https://oss.oracle.com/licenses/upl/>.
