@@ -46,7 +46,7 @@ insights and suggestions.
 ## Contributing
 
 > _If your project has specific contribution requirements, update the_
-> _`CONTRIBUTING.md` file to ensure those requirements are clearly explained._
+> _`CONTRIBUTING.md` and clearly explain those requirements._
 
 This project welcomes contributions from the community. Before submitting a pull
 request, please [review our contribution guide](./CONTRIBUTING.md).
