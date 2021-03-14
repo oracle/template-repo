@@ -51,5 +51,5 @@ can be accepted.
 Follow the [Golden Rule](https://en.wikipedia.org/wiki/Golden_Rule). If you'd
 like more specific guidelines, see the [Contributor Covenant Code of Conduct][COC].
 
-[OCA]: https://www.oracle.com/technetwork/community/oca-486395.html
+[OCA]: https://oca.opensource.oracle.com
 [COC]: https://www.contributor-covenant.org/version/1/4/code-of-conduct/
