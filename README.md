@@ -40,7 +40,7 @@ vulnerability disclosure process.
     You must include the year the content was first released (on any platform) and
     the most recent year in which it was revised. -->
 
-Copyright (c) 2021 Oracle and/or its affiliates.
+Copyright (c) 2022 Oracle and/or its affiliates.
 
 <!-- Replace this statement if your project is not licensed under the UPL -->
 
