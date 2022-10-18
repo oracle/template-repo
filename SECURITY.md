@@ -1,4 +1,4 @@
-*Detailed instructions on how to report security vulnerabilities to Oracle. ***Security vulnerabilities should not be discussed publicly on GitHub issues***
+*Detailed instructions on how to report security vulnerabilities to Oracle.* ***Security vulnerabilities should not be discussed publicly on GitHub issues***
 
 # Reporting security vulnerabilities
 
