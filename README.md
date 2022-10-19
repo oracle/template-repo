@@ -1,3 +1,5 @@
+*This repository acts as a template for all of Oracle’s GitHub repositories. To this end, it contains information about the guidelines for those repositories. All files and sections contained in this template are mandatory for all repositories. A GitHub app ensures alignment with the guidelines. To get started with a new repository, replace the italic paragraphs with the respective text for your project.*
+
 # Project name
 
 *Describe your project's features, functionality and target audience*
