@@ -1,4 +1,4 @@
-# Reporting security vulnerabilities
+# Reporting security vulnerabilitieshy
 
 Oracle values the independent security research community and believes that
 responsible disclosure of security vulnerabilities helps us ensure the security
