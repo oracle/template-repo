@@ -4,7 +4,7 @@
 
 *Describe your project's features, functionality and target audience*
 
-## Installation
+## How to Install
 
 *Provide detailed step-by-step installation instructions*
 
