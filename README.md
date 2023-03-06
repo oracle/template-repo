@@ -4,11 +4,11 @@
 
 *Describe your project's features, functionality and target audience*
 
-## Installation
+## Install
 
 *Provide detailed step-by-step installation instructions*
 
-## Doc
+## Documentation
 
 *Developer-oriented documentation can be published on GitHub, but all product documentation must be published on <https://docs.oracle.com>*
 
