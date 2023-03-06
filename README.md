@@ -6,7 +6,7 @@
 
 ## Installation
 
-*Provide detailed step-by-step installation instructions*
+*Provide detailed step-by-step installation instructions* Helpful comment
 
 ## Documentation
 
