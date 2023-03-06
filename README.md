@@ -8,7 +8,7 @@
 
 *Provide detailed step-by-step installation instructions*
 
-## Documentation
+## Doc
 
 *Developer-oriented documentation can be published on GitHub, but all product documentation must be published on <https://docs.oracle.com>*
 
