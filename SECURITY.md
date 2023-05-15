@@ -21,8 +21,9 @@ security features are welcome on GitHub Issues.
 
 Security updates will be released on a regular cadence. Many of our projects
 will typically release security fixes in conjunction with the
-Oracle Critical Patch Update program. Check out the program page for information about 
-[security alerts][4], CPU release schedule, and more.
+Oracle Critical Patch Update program. Additional
+information, including past advisories, is available on our [security alerts][4]
+page.
 
 ## Security-related information
 
