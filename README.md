@@ -6,7 +6,7 @@
 
 ## Installation
 
-*Provide detailed step-by-step installation instructions*
+*Provide detailed step-by-step installation instructions. You can name this section **How to Run** or **Getting Started** instead of **Installation** if that's more acceptable for your project*
 
 ## Documentation
 
