@@ -14,8 +14,6 @@ We encourage people who contact Oracle Security to use email encryption using
 We ask that you do not use other channels or contact the project maintainers
 directly.
 
-Non-vulnerability related security issues including ideas for new or improved
-security features are welcome on GitHub Issues.
 
 ## Security updates, alerts and bulletins
 
