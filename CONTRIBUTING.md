@@ -4,7 +4,7 @@
 
 We welcome your contributions! There are multiple ways to contribute.
 
-## Opening issues
+## Opening issues 
 
 For bugs or enhancement requests, please file a GitHub issue unless it's
 security related. When filing a bug remember that the better written the bug is,
