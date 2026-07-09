@@ -217,7 +217,7 @@ The source repository and central workflow should themselves be protected with r
 
 ## References
 
-- [GitHub Compliance Audit Service](https://confluence.oraclecorp.com/confluence/display/OGHO/GitHub+Compliance+Audit+Service)
+- GitHub Compliance Audit Service documentation (Oracle internal; available in the OGHO Confluence space)
 - [Oracle template repository](https://github.com/oracle/template-repo)
 - [GitHub: Require workflows to pass before merging](https://docs.github.com/en/enterprise-cloud@latest/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets#require-workflows-to-pass-before-merging)
 - [GitHub: Create rulesets for repositories in an organization](https://docs.github.com/en/organizations/managing-organization-settings/creating-rulesets-for-repositories-in-your-organization)
