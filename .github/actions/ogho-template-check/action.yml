@@ -1,0 +1,32 @@
+name: OGHO template compliance
+description: Validate a repository against the GCAS OGHO template checks.
+
+inputs:
+  path:
+    description: Repository path to validate, relative to GITHUB_WORKSPACE.
+    required: false
+    default: .
+  repository-name:
+    description: Repository name override. By default, the GitHub event metadata is used.
+    required: false
+    default: ""
+  default-branch:
+    description: Default branch override. By default, the GitHub event metadata is used.
+    required: false
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - name: Validate OGHO template compliance
+      shell: bash
+      env:
+        INPUT_REPOSITORY_PATH: ${{ inputs.path }}
+        INPUT_REPOSITORY_NAME: ${{ inputs.repository-name }}
+        INPUT_DEFAULT_BRANCH: ${{ inputs.default-branch }}
+      run: |
+        python3 "$GITHUB_ACTION_PATH/check.py" \
+          --repository-root "$GITHUB_WORKSPACE/$INPUT_REPOSITORY_PATH" \
+          --repository-name "$INPUT_REPOSITORY_NAME" \
+          --default-branch "$INPUT_DEFAULT_BRANCH" \
+          --canonical-security "$GITHUB_ACTION_PATH/templates/SECURITY.md"
