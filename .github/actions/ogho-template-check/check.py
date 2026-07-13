@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-REQUIRED_FILES = ("LICENSE.txt", "README.md", "CONTRIBUTING.md", "SECURITY.md")
+REQUIRED_FILES = ("LICENSE.txt", "README.md", "SECURITY.md")
 OCA_URL = "https://oca.opensource.oracle.com"
 REPOSITORY_NAME_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
@@ -48,6 +48,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--repository-root", type=Path, default=Path.cwd())
     parser.add_argument("--repository-name", default="")
     parser.add_argument("--default-branch", default="")
+    parser.add_argument(
+        "--contributing-policy",
+        choices=("optional", "required", "disabled"),
+        default="optional",
+        help=(
+            "Whether CONTRIBUTING.md is optional, required locally, or ignored. "
+            "An optional local file is validated when present."
+        ),
+    )
     parser.add_argument("--canonical-security", type=Path, required=True)
     return parser.parse_args()
 
@@ -238,6 +247,36 @@ def validate(args: argparse.Namespace) -> list[Result]:
                     else f"{required_file} must exist as a file at the repository root with this exact name."
                 ),
                 required_file,
+            )
+        )
+
+    if args.contributing_policy != "disabled":
+        contributing_path = exact_root_file(root, "CONTRIBUTING.md")
+        if contributing_path is not None:
+            files["CONTRIBUTING.md"] = contributing_path
+
+        contributing_required = args.contributing_policy == "required"
+        results.append(
+            Result(
+                (
+                    "Required file: CONTRIBUTING.md"
+                    if contributing_required
+                    else "Optional file: CONTRIBUTING.md"
+                ),
+                contributing_path is not None or not contributing_required,
+                (
+                    "CONTRIBUTING.md exists at the repository root and will be validated."
+                    if contributing_path is not None
+                    else (
+                        "CONTRIBUTING.md must exist as a file at the repository root with this exact name."
+                        if contributing_required
+                        else (
+                            "CONTRIBUTING.md is not present locally; GitHub may use the "
+                            "organization-wide community health file."
+                        )
+                    )
+                ),
+                "CONTRIBUTING.md",
             )
         )
 

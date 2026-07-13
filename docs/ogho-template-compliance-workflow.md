@@ -25,10 +25,10 @@ This workflow covers **template checks only**. It does not generate an SBOM, sca
 | --- | --- |
 | Repository name | Uses lowercase letters, digits, and single dashes. |
 | Default branch | Is named `main`. |
-| Required files | `LICENSE.txt`, `README.md`, `CONTRIBUTING.md`, and `SECURITY.md` exist at the repository root with the exact filename and case. |
+| Required files | `LICENSE.txt`, `README.md`, and `SECURITY.md` exist at the repository root with the exact filename and case. `CONTRIBUTING.md` is optional by default so repositories can inherit Oracle's organization-wide community health file. |
 | License format | `LICENSE.txt` contains printable ASCII text and LF line endings. |
 | README | Contains a level-one project title and the Installation, Documentation, Examples, Help, Contributing, Security, and License sections. `How to Run` and `Getting Started` are accepted alternatives to `Installation`. |
-| Contributing guide | Contains a level-one title; the Opening Issues, Contributing Code, Pull Request Process, and Code of Conduct sections; and a link to the Oracle Contributor Agreement application. |
+| Contributing guide | When a local `CONTRIBUTING.md` is present, it contains a level-one title; the Opening Issues, Contributing Code, Pull Request Process, and Code of Conduct sections; and a link to the Oracle Contributor Agreement application. |
 | Security policy | `SECURITY.md` is byte-for-byte identical to the canonical policy bundled with the selected action version. |
 
 ## Implementation
@@ -95,6 +95,7 @@ Normal GitHub workflows do not need to set any inputs.
 | `path` | `.` | Repository path to inspect, relative to `GITHUB_WORKSPACE`. |
 | `repository-name` | GitHub event metadata | Overrides the repository name, primarily for local testing or nonstandard execution contexts. |
 | `default-branch` | GitHub event metadata | Overrides the default branch, primarily for local testing or nonstandard execution contexts. |
+| `contributing-policy` | `optional` | Controls local `CONTRIBUTING.md` validation: `optional` allows inheritance and validates a local file when present; `required` requires and validates a root-level file; `disabled` skips it entirely. |
 
 Example for checking a repository staged in a subdirectory:
 
@@ -103,6 +104,16 @@ Example for checking a repository staged in a subdirectory:
   with:
     path: checked-out-repository
 ```
+
+Repositories that must maintain their own contributing guide can require it explicitly:
+
+```yaml
+- uses: oracle/template-repo/.github/actions/ogho-template-check@<FULL_COMMIT_SHA>
+  with:
+    contributing-policy: required
+```
+
+The default `optional` policy does not fetch or validate Oracle's inherited file. It allows the local file to be absent because GitHub can display the organization-wide `CONTRIBUTING.md` from `oracle/.github`. If a repository provides its own root-level file, the action validates it. Use `disabled` only when neither local nor inherited contributing guidance should be part of this check.
 
 ## Organization-wide enforcement
 
@@ -192,7 +203,7 @@ The new repository becomes subject to the ruleset after initialization.
 | --- | --- |
 | Invalid repository name | Rename the repository using lowercase words separated by dashes. Coordinate redirects and dependent automation before renaming. |
 | Default branch is not `main` | Rename the default branch and update branch-protection, build, deployment, and documentation references. |
-| Required file is missing | Add the exact root-level filename from `oracle/template-repo`. |
+| Required file is missing | Add the exact root-level filename from `oracle/template-repo`. To require a repository-local `CONTRIBUTING.md`, set `contributing-policy: required`; otherwise it is optional. |
 | Invalid `LICENSE.txt` format | Convert the file to printable ASCII and LF line endings. Do not replace the approved license text without the appropriate review. |
 | README section is missing | Add the missing heading and relevant project content. Installation may instead be titled How to Run or Getting Started. |
 | CONTRIBUTING section or OCA link is missing | Restore the required section or the `https://oca.opensource.oracle.com` reference. |
@@ -219,6 +230,7 @@ The source repository and central workflow should themselves be protected with r
 
 - GitHub Compliance Audit Service documentation (Oracle internal; available in the OGHO Confluence space)
 - [Oracle template repository](https://github.com/oracle/template-repo)
+- [GitHub: Create a default community health file](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file)
 - [GitHub: Require workflows to pass before merging](https://docs.github.com/en/enterprise-cloud@latest/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets#require-workflows-to-pass-before-merging)
 - [GitHub: Create rulesets for repositories in an organization](https://docs.github.com/en/organizations/managing-organization-settings/creating-rulesets-for-repositories-in-your-organization)
 - [GitHub: Troubleshoot ruleset workflows](https://docs.github.com/en/enterprise-cloud@latest/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/troubleshooting-rules#troubleshooting-ruleset-workflows)

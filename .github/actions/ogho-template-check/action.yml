@@ -14,6 +14,10 @@ inputs:
     description: Default branch override. By default, the GitHub event metadata is used.
     required: false
     default: ""
+  contributing-policy:
+    description: How to check CONTRIBUTING.md: optional, required, or disabled.
+    required: false
+    default: optional
 
 runs:
   using: composite
@@ -24,9 +28,11 @@ runs:
         INPUT_REPOSITORY_PATH: ${{ inputs.path }}
         INPUT_REPOSITORY_NAME: ${{ inputs.repository-name }}
         INPUT_DEFAULT_BRANCH: ${{ inputs.default-branch }}
+        INPUT_CONTRIBUTING_POLICY: ${{ inputs.contributing-policy }}
       run: |
         python3 "$GITHUB_ACTION_PATH/check.py" \
           --repository-root "$GITHUB_WORKSPACE/$INPUT_REPOSITORY_PATH" \
           --repository-name "$INPUT_REPOSITORY_NAME" \
           --default-branch "$INPUT_DEFAULT_BRANCH" \
+          --contributing-policy "$INPUT_CONTRIBUTING_POLICY" \
           --canonical-security "$GITHUB_ACTION_PATH/templates/SECURITY.md"
