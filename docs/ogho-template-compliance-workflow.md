@@ -83,6 +83,8 @@ jobs:
 
 Replace `<FULL_COMMIT_SHA>` with an approved commit containing a released version of the action. Pinning the full commit SHA prevents an unreviewed change to the action from changing the code executed by repository workflows.
 
+The workflow runs when a pull request is opened or updated and when GitHub creates a merge group. It intentionally does not run on `push` or `workflow_dispatch`. Repository or organization rules must require pull requests and block direct changes to the protected default branch; the pull request check then prevents noncompliant changes from merging. The `merge_group` event ensures that the same required check runs for repositories using a merge queue.
+
 The workflow needs only `contents: read`. It does not require repository or organization secrets.
 
 ### Action inputs
@@ -145,7 +147,7 @@ jobs:
         uses: oracle/template-repo/.github/actions/ogho-template-check@<FULL_COMMIT_SHA>
 ```
 
-The `merge_group` trigger is required for repositories using a merge queue. Do not use `pull_request_target`: the validator needs only the pull request contents and a read-only token.
+The `merge_group` trigger is required for repositories using a merge queue. A ruleset workflow supports `pull_request`, `pull_request_target`, and `merge_group`; `push` and `workflow_dispatch` are not enforcement triggers. Do not use `pull_request_target`: the validator needs only the pull request contents and a read-only token.
 
 ### Organization ruleset configuration
 
