@@ -64,8 +64,7 @@ name: OGHO template compliance
 
 on:
   pull_request:
-  push:
-  workflow_dispatch:
+  merge_group:
 
 permissions:
   contents: read
