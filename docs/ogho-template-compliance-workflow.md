@@ -29,7 +29,7 @@ This workflow covers **template checks only**. It does not generate an SBOM, sca
 | License format | `LICENSE.txt` contains printable ASCII text and LF line endings. |
 | README | Contains a level-one project title and the Installation, Documentation, Examples, Help, Contributing, Security, and License sections. `How to Run` and `Getting Started` are accepted alternatives to `Installation`. |
 | Contributing guide | When a local `CONTRIBUTING.md` is present, it contains a level-one title; the Opening Issues, Contributing Code, Pull Request Process, and Code of Conduct sections; and a link to the Oracle Contributor Agreement application. |
-| Security policy | `SECURITY.md` is byte-for-byte identical to the canonical policy bundled with the selected action version. |
+| Security policy | `SECURITY.md` is byte-for-byte identical to the root policy on the latest `main` revision of `oracle/template-repo`. |
 
 ## Implementation
 
@@ -37,10 +37,10 @@ The implementation is maintained in `oracle/template-repo`:
 
 - Composite action: `.github/actions/ogho-template-check/action.yml`
 - Validator: `.github/actions/ogho-template-check/check.py`
-- Canonical security policy: `.github/actions/ogho-template-check/templates/SECURITY.md`
+- Canonical security policy: root `SECURITY.md` on the `main` branch
 - Template-repository workflow: `.github/workflows/ogho-template-compliance.yml`
 
-The action uses Bash and Python's standard library. It does not install dependencies or execute application code from the repository being inspected.
+The action uses Bash, `curl`, and Python's standard library. It downloads the canonical `SECURITY.md` from `https://raw.githubusercontent.com/oracle/template-repo/main/SECURITY.md`; it does not install dependencies or execute application code from the repository being inspected.
 
 ## Using the workflow in another repository
 
@@ -81,7 +81,7 @@ jobs:
         uses: oracle/template-repo/.github/actions/ogho-template-check@<FULL_COMMIT_SHA>
 ```
 
-Replace `<FULL_COMMIT_SHA>` with an approved commit containing a released version of the action. Pinning the full commit SHA prevents an unreviewed change to the action from changing the code executed by repository workflows.
+Replace `<FULL_COMMIT_SHA>` with an approved commit containing a released version of the action. Pinning the full commit SHA prevents an unreviewed change to the action code from changing the code executed by repository workflows. The canonical security policy is intentionally not pinned: each run compares against the root `SECURITY.md` from the latest `main` revision of `oracle/template-repo`.
 
 The workflow runs when a pull request is opened or updated and when GitHub creates a merge group. It intentionally does not run on `push` or `workflow_dispatch`. Repository or organization rules must require pull requests and block direct changes to the protected default branch; the pull request check then prevents noncompliant changes from merging. The `merge_group` event ensures that the same required check runs for repositories using a merge queue.
 
@@ -174,7 +174,8 @@ Before activation, confirm that:
 
 - GitHub Actions is enabled for all targeted repositories.
 - Organization Actions policy permits `actions/checkout` and the action under `oracle/template-repo`.
-- GitHub-hosted runners are available, or self-hosted runners provide Bash, Python 3.10 or later, and a current Actions runner compatible with `actions/checkout@v7`.
+- GitHub-hosted runners are available, or self-hosted runners provide Bash, `curl`, Python 3.10 or later, and a current Actions runner compatible with `actions/checkout@v7`.
+- Runners can make outbound HTTPS requests to `raw.githubusercontent.com` to retrieve the canonical security policy.
 - The source workflow repository has suitable visibility. A public workflow can target repositories of any visibility; an internal workflow can target internal and private repositories; a private workflow can target private repositories.
 - If the source repository is internal or private, **Actions → General → Access** allows access from repositories in the Oracle organization.
 - The workflow does not use `cancel-in-progress` concurrency, which is unsuitable for ruleset-required workflows.
@@ -208,7 +209,7 @@ The new repository becomes subject to the ruleset after initialization.
 | Invalid `LICENSE.txt` format | Convert the file to printable ASCII and LF line endings. Do not replace the approved license text without the appropriate review. |
 | README section is missing | Add the missing heading and relevant project content. Installation may instead be titled How to Run or Getting Started. |
 | CONTRIBUTING section or OCA link is missing | Restore the required section or the `https://oca.opensource.oracle.com` reference. |
-| `SECURITY.md` differs | Replace it with the canonical file bundled with the pinned action version. Project-specific security guidance belongs in product documentation, not as a modification to this policy. |
+| `SECURITY.md` differs | Replace it with the root `SECURITY.md` from the latest `main` revision of `oracle/template-repo`. Project-specific security guidance belongs in product documentation, not as a modification to this policy. |
 | Default branch cannot be determined | Ensure the workflow is running from a GitHub repository event, or supply the `default-branch` input for a nonstandard execution context. |
 
 The action reports all detected failures in one run so repository owners can remediate them together.
@@ -219,11 +220,10 @@ Changes to the Oracle repository template require coordinated action maintenance
 
 1. Update the root template files in `oracle/template-repo`.
 2. Update the validator's required sections or accepted aliases as needed.
-3. When `SECURITY.md` changes, update the bundled canonical copy in the same pull request.
-4. Run the validator against the template repository and intentional negative fixtures.
-5. Merge the reviewed change and record the new full commit SHA.
-6. Update the central ruleset workflow to the new SHA.
-7. Use Evaluate mode or a limited target set when a new requirement may affect existing repositories.
+3. Run the validator against the template repository and intentional negative fixtures.
+4. Merge the reviewed change and record the new full commit SHA.
+5. Update the central ruleset workflow to the new SHA when action code changes. A root `SECURITY.md` change becomes canonical as soon as it reaches `main` and does not require an action-reference update.
+6. Use Evaluate mode or a limited target set when a new requirement may affect existing repositories.
 
 The source repository and central workflow should themselves be protected with required reviews and a CODEOWNERS rule owned by the OGHO administrators.
 

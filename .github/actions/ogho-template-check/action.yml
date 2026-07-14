@@ -29,10 +29,16 @@ runs:
         INPUT_REPOSITORY_NAME: ${{ inputs.repository-name }}
         INPUT_DEFAULT_BRANCH: ${{ inputs.default-branch }}
         INPUT_CONTRIBUTING_POLICY: ${{ inputs.contributing-policy }}
+        CANONICAL_SECURITY_URL: https://raw.githubusercontent.com/oracle/template-repo/main/SECURITY.md
       run: |
+        canonical_security="$RUNNER_TEMP/ogho-template-check-SECURITY.md"
+        curl --fail --silent --show-error --location --retry 3 \
+          --output "$canonical_security" \
+          "$CANONICAL_SECURITY_URL"
+
         python3 "$GITHUB_ACTION_PATH/check.py" \
           --repository-root "$GITHUB_WORKSPACE/$INPUT_REPOSITORY_PATH" \
           --repository-name "$INPUT_REPOSITORY_NAME" \
           --default-branch "$INPUT_DEFAULT_BRANCH" \
           --contributing-policy "$INPUT_CONTRIBUTING_POLICY" \
-          --canonical-security "$GITHUB_ACTION_PATH/templates/SECURITY.md"
+          --canonical-security "$canonical_security"

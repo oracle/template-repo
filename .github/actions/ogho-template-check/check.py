@@ -383,7 +383,10 @@ def validate(args: argparse.Namespace) -> list[Result]:
                 Result(
                     "SECURITY.md template",
                     False,
-                    f"Could not read the canonical SECURITY.md bundled with the action: {error}",
+                    (
+                        "Could not read the canonical SECURITY.md from "
+                        f"oracle/template-repo's main branch: {error}"
+                    ),
                     "SECURITY.md",
                 )
             )
@@ -396,7 +399,10 @@ def validate(args: argparse.Namespace) -> list[Result]:
                     (
                         "SECURITY.md is byte-for-byte identical to the canonical template."
                         if exact_match
-                        else "SECURITY.md must be byte-for-byte identical to the canonical template bundled with this action."
+                        else (
+                            "SECURITY.md must be byte-for-byte identical to the canonical "
+                            "file on oracle/template-repo's main branch."
+                        )
                     ),
                     "SECURITY.md",
                 )
