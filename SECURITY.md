@@ -1,5 +1,3 @@
-TEST invalid content 
-
 # Reporting security vulnerabilities
 
 Oracle values the independent security research community and believes that
